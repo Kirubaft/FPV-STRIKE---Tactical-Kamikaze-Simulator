@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>FPV Kamikaze - Ultimate Edition</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
+</head>
+<body>
+    <div class="crt-lines"></div>
+    <div class="vignette"></div>
+    <div class="static-noise" id="noise-overlay"></div>
+    
+    <!-- СИСТЕМА МЕНЮ -->
+    <div id="menu-system">
+        <div class="header-stats">
+            BALANCE: $<span id="menu-money">0</span> | DRONE: <span id="menu-drone-name">SCOUT</span>
+        </div>
+
+        <!-- Головне меню -->
+        <div id="main-menu" class="menu-panel">
+            <h1 class="glitch" data-text="FPV STRIKE">FPV STRIKE</h1>
+            <h2 class="sub-title">TACTICAL CAMPAIGN</h2>
+            <div class="menu-buttons">
+                <button id="btn-start" class="cyber-btn">INITIATE STRIKE <span class="btn-glitch"></span></button>
+                <button id="btn-missions" class="cyber-btn">MISSIONS (INTEL)</button>
+                <button id="btn-loadout" class="cyber-btn">LOADOUT (GARAGE)</button>
+                <button id="btn-replays" class="cyber-btn">REPLAYS (DVR)</button>
+                <button id="btn-settings" class="cyber-btn">SYSTEM SETTINGS</button>
+            </div>
+            <div class="terminal-text">> SYSTEM BOOT... OK<br>> SATELLITE LINK... ESTABLISHED<br>> WAITING FOR OPERATOR...</div>
+        </div>
+
+        <!-- Меню Місій -->
+        <div id="missions-menu" class="menu-panel" style="display: none;">
+            <h1 class="glitch" data-text="INTEL">INTEL</h1>
+            <h2 class="sub-title">SELECT TARGET</h2>
+            <div id="mission-list"></div>
+            <button id="btn-back-missions" class="cyber-btn" style="margin-top: 30px;">BACK TO MENU</button>
+        </div>
+
+        <!-- Меню Гаража -->
+        <div id="loadout-menu" class="menu-panel" style="display: none;">
+            <h1 class="glitch" data-text="LOADOUT">LOADOUT</h1>
+            <div id="drone-list"></div>
+            <button id="btn-back-loadout" class="cyber-btn" style="margin-top: 30px;">BACK TO MENU</button>
+        </div>
+
+        <!-- Меню Реплеїв -->
+        <div id="replays-menu" class="menu-panel" style="display: none;">
+            <h1 class="glitch" data-text="DVR REPLAYS">DVR REPLAYS</h1>
+            <div id="video-container"><video id="replay-player" controls></video></div>
+            <div id="replay-list"></div>
+            <button id="btn-back-replays" class="cyber-btn" style="margin-top: 30px;">BACK TO MENU</button>
+        </div>
+
+        <!-- Меню Налаштувань -->
+        <div id="settings-menu" class="menu-panel" style="display: none;">
+            <h1 class="glitch" data-text="SETTINGS">SETTINGS</h1>
+            <div class="settings-group">
+                <label>MASTER VOLUME: <span id="vol-val">100%</span></label>
+                <input type="range" id="setting-vol" min="0" max="100" value="100">
+            </div>
+            <div class="settings-group">
+                <label>SHADOWS (PERFORMANCE):</label>
+                <button id="setting-shadows" class="cyber-btn" style="width: 200px;">ON</button>
+            </div>
+            <div class="settings-group" style="margin-top: 40px;">
+                <label>PROMO CODE:</label>
+                <input type="text" id="promo-input" placeholder="ENTER CODE" class="cyber-input">
+                <button id="btn-promo" class="cyber-btn" style="width: 150px; display: inline-block; padding: 10px;">REDEEM</button>
+                <span id="promo-msg" style="margin-left: 15px; font-size: 20px; font-weight: bold;"></span>
+            </div>
+            <button id="btn-back-settings" class="cyber-btn" style="margin-top: 30px;">BACK TO MENU</button>
+        </div>
+    </div>
+
+    <!-- ІНТЕРФЕЙС ПІЛОТА (OSD) -->
+    <div id="osd-layer" style="display: none;">
+        <div class="mission-hud" id="mission-hud">MISSION: LOADING...</div>
+        <div class="osd top-left"><span id="mode-text">ARMED // ANGLE</span><br><span id="speed-text">SPD: 0 km/h</span></div>
+        <div class="osd top-right"><span class="rec">REC •</span><br><span id="time-text">00:00</span></div>
+        <div class="crosshair-container">
+            <div class="horizon-line" id="horizon"></div>
+            <div class="crosshair"><div class="bracket">[</div><div class="center-dot">✛</div><div class="bracket">]</div></div>
+        </div>
+        <div class="osd bottom-left"><span id="alt-text">ALT: 0.0m</span><br><span id="dist-text">TGT: 0m</span></div>
+        <div class="osd bottom-right"><span id="volt-text">25.2V</span><br><span class="warn" id="warn-text"></span></div>
+    </div>
+
+    <!-- Екран результату місії -->
+    <div id="mission-result" style="display: none;">
+        <h1 id="result-title">MISSION PASSED</h1>
+        <p id="result-reward">+$500</p>
+        <p class="blink">PRESS 'R' TO RESTART</p>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

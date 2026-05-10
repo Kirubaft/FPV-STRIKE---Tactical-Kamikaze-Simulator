@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body { margin: 0; overflow: hidden; background-color: #000; user-select: none; font-family: 'Share Tech Mono', monospace; color: #0f0; }
+
+.crt-lines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 4px, 3px 100%; pointer-events: none; z-index: 10; }
+.vignette { position: absolute; top: 0; left: 0; width: 100%; height: 100%; box-shadow: 0 0 250px rgba(0,0,0,0.95) inset; pointer-events: none; z-index: 11; }
+.static-noise { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E'); opacity: 0; pointer-events: none; z-index: 12; mix-blend-mode: screen; }
+
+/* МЕНЮ */
+#menu-system { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, rgba(0,20,0,0.9) 100%); z-index: 100; display: flex; flex-direction: column; padding: 50px; box-sizing: border-box; }
+.header-stats { position: absolute; top: 30px; right: 50px; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 0 #000; }
+.menu-panel { margin-top: 80px; border-left: 4px solid #0f0; padding-left: 30px; }
+.glitch { font-size: 80px; color: #fff; text-shadow: 2px 0 #0f0, -2px 0 #f00; margin: 0; }
+.sub-title { color: #0f0; font-size: 24px; letter-spacing: 5px; margin-top: 0; margin-bottom: 40px; opacity: 0.8; }
+
+.cyber-btn { display: block; width: 400px; padding: 15px 20px; margin-bottom: 15px; background: rgba(0, 50, 0, 0.5); border: 1px solid #0f0; color: #0f0; font-family: 'Share Tech Mono', monospace; font-size: 24px; text-align: left; cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
+.cyber-btn:hover { background: #0f0; color: #000; box-shadow: 0 0 20px #0f0; transform: translateX(20px); }
+.cyber-btn:disabled { opacity: 0.3; cursor: not-allowed; border-color: #555; color: #555; transform: none; background: transparent; box-shadow: none; }
+
+.list-card { border: 1px solid #0f0; padding: 15px; margin-bottom: 10px; width: 600px; background: rgba(0,20,0,0.8); display: flex; justify-content: space-between; align-items: center; }
+.list-info h3 { margin: 0 0 5px 0; color: #fff; }
+.list-info p { margin: 0; font-size: 14px; opacity: 0.8; }
+
+/* НАЛАШТУВАННЯ */
+.settings-group { margin-bottom: 20px; }
+.settings-group label { display: block; font-size: 20px; margin-bottom: 10px; }
+.cyber-input { background: rgba(0,20,0,0.8); border: 1px solid #0f0; color: #0f0; padding: 10px; font-family: 'Share Tech Mono', monospace; font-size: 20px; width: 250px; outline: none; text-transform: uppercase; }
+input[type=range] { accent-color: #0f0; width: 300px; cursor: pointer; }
+
+#video-container { width: 640px; height: 360px; border: 2px solid #0f0; background: #000; margin-bottom: 20px; }
+video { width: 100%; height: 100%; outline: none; }
+.replay-item { cursor: pointer; padding: 10px; border: 1px solid #0f0; margin-bottom: 5px; width: 300px; transition: 0.2s; }
+.replay-item:hover { background: #0f0; color: #000; }
+
+/* OSD & HUD */
+.osd { position: absolute; color: #0f0; text-shadow: 2px 2px 0 #000, -1px -1px 0 #000; font-weight: bold; z-index: 20; }
+.top-left { top: 30px; left: 40px; font-size: 20px; } .top-right { top: 30px; right: 40px; font-size: 20px; text-align: right; }
+.bottom-left { bottom: 30px; left: 40px; font-size: 20px; } .bottom-right { bottom: 30px; right: 40px; font-size: 26px; text-align: right; }
+.crosshair-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; pointer-events: none; z-index: 15; }
+.horizon-line { position: absolute; top: 50%; left: 10%; width: 80%; height: 2px; background: rgba(0, 255, 0, 0.5); box-shadow: 0 0 5px #000; transition: transform 0.1s; }
+.crosshair { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; gap: 15px; font-size: 28px; text-shadow: 2px 2px 0 #000; }
+.center-dot { font-size: 36px; color: #f33; }
+.rec { color: #f33; animation: blink 1s infinite; }
+.warn { color: #f00; font-size: 30px; animation: blink 0.3s infinite; }
+
+.mission-hud { position: absolute; top: 80px; left: 50%; transform: translateX(-50%); font-size: 24px; background: rgba(0,0,0,0.7); padding: 5px 20px; border: 1px solid #0f0; z-index: 20; }
+
+#mission-result { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 150; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+#result-title { font-size: 60px; margin: 0; }
+#result-reward { font-size: 40px; color: #0f0; margin: 20px 0; }
+.blink { animation: blink 1s infinite; }
+@keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
